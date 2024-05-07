@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Responsive Admin Dashboard Template">
+<meta name="keywords" content="admin,dashboard">
+<meta name="author" content="stacks">
+<!-- The above 6 meta tags *must* come first in the head;any other head content must come *after* these tags --><!-- Title -->
+<title>后台评论管理</title>
+<!-- Styles -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&display=swap" rel="stylesheet">
+<link href="/statics/assets_tech/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/statics/assets_tech/plugins/font-awesome/css/all.min.css" rel="stylesheet">
+<link href="/statics/assets_tech/plugins/perfectscroll/perfect-scrollbar.css" rel="stylesheet">
+<link href="/statics/assets_tech/plugins/apexcharts/apexcharts.css" rel="stylesheet">
+<!-- Theme Styles -->
+<link href="/statics/assets_tech/css/main.min.css" rel="stylesheet">
+<link href="/statics/assets_tech/css/custom.css" rel="stylesheet">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --><!-- WARNING:Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body class="email-page">
+<div class='loader'>
+  <div class='spinner-grow text-primary' role='status'> <span class='sr-only'>Loading...</span></div>
+</div>
+<div class="page-container">
+  <div >
+    <div class="main-wrapper">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{eva_list.0.eva_type}}</h5>
+              <p>展示评价信息</p>
+              <table id="zero-conf" class="display" style="width:100%" >
+                <thead>
+                  <tr>
+                    <th>学号/教工号</th>
+                    <th>姓名</th>
+                    <th>班级</th>
+                    <th>小组编号</th>
+                    <th>学习主题</th>
+                    <th>评价时间</th>
+                    <th>被评价人</th>
+                    <th>##</th>
+                  </tr>
+                </thead>
+                <tbody id="stuinfo" name="stuinfo">
+                {%  for row in eva_list %}
+                 <tr>
+              <td>{{ row.valuer_num }}</td>
+                   <td>{{ row.valuer_name }}</td>
+                   <td>{{ row.valuer_class }}</td>
+              <td>{{ row.group_id }}</td>
+              <td>{{ row.act_name }}</td>
+              <td>{{ row.eva_time }}</td>
+              <td>{{ row.beeva_num }}</td>
+              <td>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="displayeva('{{eva_list.0.eva_type}}','{{ row.valuer_num }}','{{ row.beeva_name}}')">查看详情</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_eva" onclick="deleteeva('{{row.pj_id}}')">删除评价</button>
+              </td>
+            </tr>
+        {% endfor %}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>班级</th>
+                    <th>小组编号</th>
+                    <th>学习主题</th>
+                    <th>评价时间</th>
+                    <th>被评价人</th>
+                    <th>##</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+        <!-- Modal1-预览 -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div style="width:200%"
+                          class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">评价信息</h5>
+
+                      <button id="close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                   <div  style="font-size:16px;"  class="modal-body">
+                     <div class="row">
+                        <div class="col-md-6 col-xl-3">
+                           <p id="valuer_name">评价者:</p>
+                        </div>
+                        <div class="col-md-6 col-xl-3">
+                           <p id="group_id">小组编号:</p>
+                        </div>
+                     </div>
+                     <div class="row">
+                       <div class="col-md-6 col-xl-3">
+                          <p id="eva_time">评价时间:</p>
+                        </div>
+                        <div class="col-md-6 col-xl-3">
+                          <p id="eva_type">评价类型:</p>
+                        </div>
+                     </div>
+                     <div class="row">
+                       <div class="col-md-6 col-xl-3">
+                          <p id="beeva_num">被评价者:</p>
+                        </div>
+                     </div>
+                      <table class="table" id="Evalist" name="Evalist">
+                           <thead>
+                              <tr>
+                                <th>序号</th>
+                                <th>评价编号</th>
+                                <th>评价题目</th>
+                                <th>评价分/时长</th>
+                              </tr>
+                            </thead>
+                            <tbody id="evainfo" name="evainfo">
+
+                             </tbody>
+                      </table>
+                   </div>
+                    <div class="modal-footer">
+                      <button id="close1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+        <!-- Modal1-删除 -->
+        <div class="modal fade" id="delete_eva" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="delete_evaLabel">删除评价表</h5>
+
+                      <button id="delete_close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                   <div  style="font-size:16px;"  class="modal-body">
+                       <div class="row">
+                           <div class="col-md-6 col-xl-3">
+                                 <p>编号:</p>
+                           </div>
+                           <div class="col-md-6 col-xl-3">
+                                <p id="delete_pj_id"></p>
+                           </div>
+                       </div>
+                    确定删除该评价表？
+                   </div>
+                    <div class="modal-footer">
+                      <button id="delete_close1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                        <button  type="button" class="btn btn-primary" onclick="delete_eva()">确认删除</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Javascripts --><script src="/statics/assets_tech/plugins/jquery/jquery-3.4.1.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="/statics/assets_tech/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/statics/bootstrap/bootstrapValidator.js"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<script src="/statics/assets_tech/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+<script src="/statics/assets_tech/plugins/apexcharts/apexcharts.min.js"></script>
+<script src="/statics/assets_tech/plugins/DataTables/datatables.min.js"></script>
+<script src="/statics/assets_tech/plugins/chartjs/chart.bundle.min.js"></script>
+<script src="/statics/assets_tech/js/main.min.js"></script>
+<script src="/statics/assets_tech/js/pages/datatables.js"></script>
+<!--<script src="/statics/assets_tech/js/pages/dashboard.js"></script>-->
+<script src="/statics/techinit/main.js"></script>
+<script src="/statics/techinit/eva_manage.js"></script>
+</body>
+</html>

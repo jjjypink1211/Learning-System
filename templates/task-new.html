@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.0</title>
+      {% load static %}
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/statics/css/font.css">
+    <link rel="stylesheet" href="/statics/css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/statics/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/statics/js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+    {% csrf_token %}
+    <div class="x-body">
+        <form id="new_task" class="layui-form">
+            <div class="layui-form-item">
+              <label for="L_id" class="layui-form-label">
+                  <span class="x-red">*</span>序号
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_id" name="L_id" required=""
+                  autocomplete="off" class="layui-input" value="{{max}}" readonly="true" style="background:#CCCCCC">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>唯一标识
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_groupid" class="layui-form-label">
+                  <span class="x-red">*</span>小组编号
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_groupid" name="groupid" required=""
+                  autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>小组的唯一标识
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="Name" class="layui-form-label">
+                  <span class="x-red">*</span>学生姓名
+              </label>
+              <div class="layui-input-inline">
+                  <select id="Name" name="Name" lay-filter="Name" >
+                        <!--<option value="">请选择</option>-->
+                  </select>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="role" class="layui-form-label">
+                  <span class="x-red">*</span>组内角色
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="role" name="role" required=""
+                  autocomplete="off" readonly="true" class="layui-input" style="background:#CCCCCC">
+              </div>
+          </div>
+          <div class="layui-form-item">
+            <label for="task_id" class="layui-form-label">
+                <span class="x-red">*</span>任务编号
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="task_id" name="task_id" required="" lay-verify="isbn"
+                autocomplete="off" class="layui-input"  value="{{max_task}}" readonly="true" style="background:#CCCCCC">
+            </div>
+               <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>默认值
+              </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_content" class="layui-form-label">
+                <span class="x-red">*</span>任务内容
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_content" name="L_content" required=""
+                autocomplete="off" class="layui-input">
+            </div>
+        </div>
+          <div class="layui-form-item">
+            <label for="L_starttime" class="layui-form-label">
+                <span class="x-red">*</span>开始时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_starttime" name="start_time" placeholder="yyyy-MM-dd" class="layui-input">
+            </div>
+        </div>
+            <div class="layui-form-item">
+            <label for="L_endtime" class="layui-form-label">
+                <span class="x-red">*</span>结束时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_endtime" name="end_time"  placeholder="yyyy-MM-dd"
+                class="layui-input">
+            </div>
+        </div>
+            <div class="layui-form-item">
+              <label for="type" class="layui-form-label">
+                  <span class="x-red">*</span>任务类型
+              </label>
+              <div class="layui-input-inline">
+                  <select id="type" name="type" lay-filter="type" >
+                        <option value="1">职责任务</option>
+                        <option value="2">学习任务</option>
+                  </select>
+              </div>
+          </div>
+            <div class="layui-form-item">
+              <label for="type" class="layui-form-label">
+                  <span class="x-red">*</span>前置任务
+              </label>
+              <div class="layui-input-inline">
+                  <select id="sub_id" name="sub_id" lay-filter="sub_id" >
+
+                  </select>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  添加
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+        layui.use('laydate',function(){
+            var laydate=layui.laydate;
+            laydate.render({
+            elem:'#L_starttime'
+            });
+        });
+        layui.use('laydate',function(){
+            var laydate=layui.laydate;
+            laydate.render({
+            elem:'#L_endtime'
+            });
+        });
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+        var form = layui.form
+        ,layer = layui.layer;
+        //自定义验证规则
+        form.verify({
+          cd: function(value){
+            if(value.length !=9 )
+            {
+              return '学号由9位字符组成';
+            }
+          }
+          ,jiage: function(value){
+              if(value<0|| value == 0)
+              {
+                  return '不能输入0或负值';
+              }
+          }
+        });
+
+        //监听提交
+        form.on('submit(add)', function(data){
+          console.log(data.field);
+          var starttime=data.field.start_time;
+          var endtime=data.field.end_time;
+          //判断时间
+         var start_time=starttime.toString().split("-");
+         month=parseInt(start_time[1]);
+         month=month-1;
+         start_time[1]=month.toString();
+         var sttime=new Date(start_time[0],start_time[1],start_time[2]);
+         var end_time=endtime.toString().split("-");
+         month=parseInt(end_time[1]);
+         month=month-1;
+         end_time[1]=month.toString();
+         console.log(start_time)
+         console.log(end_time)
+         var entime=new Date(end_time[0],end_time[1],end_time[2]);
+         var myDate = new Date();
+          if(sttime.getTime() > entime.getTime()){
+                    alert("开始的时间不能比结束的时间还要晚！");
+                    return;
+          }else if(myDate.getTime() > entime.getTime())
+          {
+               alert("结束的时间不能早于现在的时间！");
+               return;
+          }else if(myDate.getTime() > sttime.getTime())
+          {
+                   alert("开始的时间不能早于现在的时间！");
+                   return;
+          }
+          //发异步，把数据提交给ajax
+          $.ajax({
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/bms_addtask/" ,//url
+            data: {'data': data.field},
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+                if (result.resultCode == 200) {
+                    layer.alert("编辑成功,已成功添加任务", {icon: 6},function () {
+                       // 获得frame索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                      //关闭当前frame
+                       parent.layer.close(index);
+                    });
+                }
+                if(result.resultCode==500){
+                    layer.alert(result.msg, {icon: 5},function () {
+                       // 获得frame索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                      //关闭当前frame
+                       parent.layer.close(index);
+                    });
+                }
+                
+            },
+            error : function() {
+                alert("异常！");
+            }
+        });
+          
+          return false;
+        });
+        
+        
+      });
+      layui.use('form', function () {
+                var form = layui.form;
+                form.on("select(Name)",function(data){
+                        var num = data.value;
+                        $.ajax({
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/query_stu/" ,//url
+            data: {num : num},
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+                if (result.resultCode == 200) {
+                   $('#role').val(result.list[0].fields.group_role);
+                }
+                if(result.resultCode==-1){
+                    layer.msg('不存在该小组编号!',{icon:5,time:1000});
+                }
+            },
+            error : function() {
+                layer.msg('异常!',{icon:5,time:1000});
+            }
+        });
+                });
+       });
+
+      $("#Name").change(function(){
+
+      })
+      $("#L_groupid").on('input propertychange',function(){
+            var csrf = $('input[name="csrfmiddlewaretoken"]').val();
+            var pk=$("#L_groupid").val();
+            //发异步，把获取修改数据
+          $.ajax({
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/newtask_stu/" ,//url
+            data: {pk : pk,'csrfmiddlewaretoken': csrf},
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+                if (result.resultCode == 200) {
+                    console.log(result.list[0].fields.name);
+                    console.log(result.list.length);
+                    var html1 = '<dd lay-value="" class="layui-select-tips layui-this">' + '请选择' + '</dd>';
+                    var html2 = '<option value="" >' + '请选择' + '</option>';
+                    for(var i=0;i<result.list.length;i++)
+                    {
+                       html1 += '<dd lay-value="' + result.list[i].fields.num + '">' + result.list[i].fields.name + '</dd>';
+                       html2 += '<option value="' + result.list[i].fields.num + '">' + result.list[i].fields.name + '</option>';
+<!--                        $("#Name").append("<option value=\""+result.list[i].fields.num+"\">"+result.list[i].fields.name+"</option>")-->
+                    }
+                    $("#Name").next().children().eq(1).html(html1);
+                    $("#Name").html(html2);
+                    var html1 = '<dd lay-value="0" class="layui-select-tips layui-this">' + '请选择' + '</dd>';
+                    var html2 = '<option value="0" >' + '请选择' + '</option>';
+                    for(var i=0;i<result.task_list.length;i++)
+                    {
+                       html1 += '<dd lay-value="' + result.task_list[i].fields.task_id + '">' + result.task_list[i].fields.task_id+':'+ '('+result.task_list[i].fields.num+')'+result.task_list[i].fields.task_content + '</dd>';
+                       html2 += '<option value="' + result.task_list[i].fields.task_id + '">' +  result.task_list[i].fields.task_id+':'+ '('+result.task_list[i].fields.num+')'+result.task_list[i].fields.task_content + '</option>';
+<!--                        $("#Name").append("<option value=\""+result.list[i].fields.num+"\">"+result.list[i].fields.name+"</option>")-->
+                    }
+                    $("#sub_id").next().children().eq(1).html(html1);
+                    $("#sub_id").html(html2);
+                    var form=layui.form;
+                    form.render();
+                    layer.msg('信息加载成功!',{icon:1,time:1000});
+                }
+                if(result.resultCode==-1){
+                    layer.msg('不存在该小组编号!',{icon:5,time:1000});
+                }
+            },
+            error : function() {
+                layer.msg('异常!',{icon:5,time:1000});
+            }
+        });
+        });
+  </script>
+    
+  </body>
+
+</html>

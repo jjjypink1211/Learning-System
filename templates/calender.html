@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>日历查看</title>
+	<link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-3.3.4.css">
+	<link rel="stylesheet" type="text/css" href="/statics/calender/css/fullcalendar.css" />
+	<link rel="stylesheet" type="text/css" href="/statics/calender/css/index.css"/>
+	{% load static %}
+<!-- Styles -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&display=swap" rel="stylesheet">
+<link href="/statics/assets_tech/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/statics/assets_tech/plugins/font-awesome/css/all.min.css" rel="stylesheet">
+  <link href="/statics/assets_tech/plugins/treejs/themes/default/style.css" rel="stylesheet">
+<link href="/statics/assets_tech/plugins/perfectscroll/perfect-scrollbar.css" rel="stylesheet">
+<!-- Theme Styles -->
+<link href="/statics/assets_tech/css/main.min.css" rel="stylesheet">
+<link href="/statics/assets_tech/css/custom.css" rel="stylesheet">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --><!-- WARNING:Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class='loader'>
+  <div class='spinner-grow text-primary' role='status'> <span class='sr-only'>Loading...</span> </div>
+</div>
+<div class="page-container">
+  <div class="page-sidebar">
+    <ul class="list-unstyled accordion-menu">
+      <li class="sidebar-title">Main </li>
+      <li ><a href="/stutask/"><i data-feather="home"></i>返回主页</a></li>
+      <li class="sidebar-title">Apps </li>
+      {% if role == "组长" %}
+      <li><a href="/leader_taskmanage/"><i data-feather="check-square"></i>任务管理</a></li>
+      {% else %}
+      <li><a href="/member_taskmanage/"><i data-feather="clipboard"></i>任务管理</a></li>
+      {% endif %}
+       {% if role == "组长" %}
+      <li><a href="/sendfeedback/"><i data-feather="mail"></i>发送反馈</a></li>
+      <li><a href="/replyfeedback/"><i data-feather="mail"></i>反馈回复</a></li>
+      {% endif %}
+      <li><a ><i data-feather="archive"></i>学习评价<i class="fas fa-chevron-right dropdown-icon"></i></a>
+         <ul class="">
+           <li ><a class="active" href="/stu_eva/"><i class="far fa-circle"></i>学生自评</a></li>
+           <li><a href="/group_eva/"><i class="far fa-circle"></i>小组评价</a></li>
+           <li><a href="/diff_eva/"><i class="far fa-circle"></i>小组互评</a></li>
+           <li><a href="/mem_eva/"><i class="far fa-circle"></i>成员互评</a></li>
+
+        </ul>
+      </li>
+      <li><a href="/stu_pj_manage/?stu_num={{stu_info.0.num}}"><i data-feather="clipboard"></i>评价管理</a></li>
+      <li><a href="/chat/{{stu_info.0.group_id}}"><i data-feather="clipboard"></i>讨论区</a></li>
+      <li class="active-page"><a href="/calendar_check/"><i data-feather="calendar"></i>日历查看</a></li>
+      {% if user.power == "组长" %}
+      <li><a href="/stumanage/"><i data-feather="users"></i>成员管理</a></li>
+      {% endif %}
+      <li><a href="file-manager.html"><i data-feather="message-circle"></i>文件管理</a></li>
+    </ul>>
+   </div>
+  <div class="page-content">
+    <div class="main-wrapper">
+				<div id="calendar"></div>
+    </div>
+  </div>
+</div>
+<!-- Javascripts -->
+	<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="/statics/calender/js/bootstrap.min.js" ></script>
+	<script type="text/javascript" src="/statics/calender/js/moment.min.js" ></script><!-- 日期处理时间工具 -->
+	<script type="text/javascript" src="/statics/calender/js/fullcalendar.min.js" ></script>
+	<script type="text/javascript" src="/statics/calender/js/index.js" ></script>
+	<script src="https://unpkg.com/feather-icons"></script>
+	<script src="/statics/assets_tech/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+	<script src="/statics/assets_tech/js/main.min.js"></script>
+</body>
+</html>

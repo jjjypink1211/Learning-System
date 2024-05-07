@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Responsive Admin Dashboard Template">
+<meta name="keywords" content="admin,dashboard">
+<meta name="author" content="stacks">
+<!-- The above 6 meta tags *must* come first in the head;any other head content must come *after* these tags --><!-- Title -->
+<title>聊天记录管理</title>
+<!-- Styles -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&display=swap" rel="stylesheet">
+<link href="/statics/assets_tech/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/statics/assets_tech/plugins/font-awesome/css/all.min.css" rel="stylesheet">
+<link href="/statics/assets_tech/plugins/perfectscroll/perfect-scrollbar.css" rel="stylesheet">
+<link href="/statics/assets_tech/plugins/apexcharts/apexcharts.css" rel="stylesheet">
+<!-- Theme Styles -->
+<link href="/statics/assets_tech/css/main.min.css" rel="stylesheet">
+<link href="/statics/assets_tech/css/custom.css" rel="stylesheet">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --><!-- WARNING:Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body>
+<div class='loader'>
+  <div class='spinner-grow text-primary' role='status'> <span class='sr-only'>Loading...</span></div>
+</div>
+<div class="page-container">
+  <div >
+    <div class="main-wrapper">
+
+      <div class="row">
+        {%for item in group_list%}
+        <div class="col-md-12 col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-meet-header">
+                <div class="card-meet-day">
+                  <h6>组号</h6>
+                  <h3>{{item.group_id}}</h3>
+                </div>
+                <div class="card-meet-text">
+                  <h6>小组学习主题</h6>
+                  <p>{{item.topic}}</p>
+                </div>
+              </div>
+              <a  href="/export_talk/?group_id={{item.group_id}}" class="btn btn-info">导出聊天记录</a>
+              <button id="yulan" onclick="manage_talkfile({{item.group_id}})"  data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="btn btn-primary">管理聊天记录</button>
+<!--              <button  onclick="manage_talkfile({{item.group_id}})" class="btn btn-info">管理聊天记录</button>-->
+              <button onclick="deleteallchat({{item.group_id}})" data-bs-toggle="modal" data-bs-target="#delete_allchat" class="btn btn-info">清空聊天记录</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+              <!-- Modal1-预览 -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div    style="width:200%"
+                          class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">聊天内容</h5>
+                      <button id="close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <table class="table" id="learnlist" name="learnlist">
+
+                   </table>
+                    <div class="modal-footer">
+                      <button id="close1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+                <!-- Modal1-删除 -->
+        <div class="modal fade" id="delete_chat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="delete_evaLabel">删除聊天记录</h5>
+
+                      <button id="delete_close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                   <div  style="font-size:16px;"  class="modal-body">
+                       <div class="row">
+                           <div class="col-md-6 col-xl-3">
+                                 <p>编号:</p>
+                           </div>
+                           <div class="col-md-6 col-xl-3">
+                                <p id="delete_chat_id"></p>
+                           </div>
+                       </div>
+                    确定删除该聊天内容？
+                     <div class="row">
+                           <div class="col-md-6 col-xl-3">
+                                 <p id="send_name">姓名:</p>
+                                 <p>发送内容:</p>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="col-md-6 col-xl-3">
+                                <p id="delete_chat_content"></p>
+                           </div>
+                       </div>
+                   </div>
+                    <div class="modal-footer">
+                      <button id="delete_close1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                        <button  type="button" class="btn btn-primary" onclick="delete_chat()">确认删除</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+                        <!-- Modal1-删除所有记录 -->
+        <div class="modal fade" id="delete_allchat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="delete_chatLabel">删除聊天记录</h5>
+
+                      <button id="delete_close2" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                   <div  style="font-size:16px;"  class="modal-body">
+                       <div class="row">
+                           <div class="col-md-6 col-xl-3">
+                                 <p>小组编号:</p>
+                           </div>
+                           <div class="col-md-6 col-xl-3">
+                                <p id="delete_group_id"></p>
+                           </div>
+                       </div>
+                    确定删除该小组所有聊天内容？
+                   </div>
+                    <div class="modal-footer">
+                      <button id="delete_close3" type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                        <button  type="button" class="btn btn-primary" onclick="delete_allchat()">确认删除</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+    </div>
+  </div>
+</div>
+<!-- Javascripts --><script src="/statics/assets_tech/plugins/jquery/jquery-3.4.1.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="/statics/assets_tech/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<script src="/statics/assets_tech/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+<script src="/statics/assets_tech/plugins/apexcharts/apexcharts.min.js"></script>
+<script src="/statics/assets_tech/plugins/chartjs/chart.bundle.min.js"></script>
+<script src="/statics/assets_tech/js/main.min.js"></script>
+<!--<script src="/statics/assets_tech/js/pages/dashboard.js"></script>-->
+<script src="/statics/techinit/talk_manage.js"></script>
+</body>
+</html>

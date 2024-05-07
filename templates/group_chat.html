@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>小组讨论</title>
+<meta name="description" content="The ultimate Bootstrap based Messaging framework to help build Messaging or Chat application fast and easy. Fully responsive and crafted with modern elements and latest design">
+<meta name="keywords" content="Chatriq, chat, messaging, theme, platform"/>
+<meta name="subject" content="">
+<meta name="copyright" content="">
+<link rel="icon" href="/statics/assets/images/stu.svg" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="/statics/dist/css/materialdesignicons.min.css">
+<link rel="stylesheet" type="text/css" href=""/>
+<link rel="stylesheet" type="text/css" href="/statics/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+<link rel="stylesheet" type="text/css" href="/statics/dist/css/app.min.css">
+<link rel="stylesheet" type="text/css" href="/statics/dist/css/theme/default-theme.min.css">
+</head>
+<body class="default-theme">
+<!-- Preloader Start -->
+<div class="preloader"></div>
+<!-- Preloader end --><!-- main wrapper start -->
+<div class="main-wrapper">
+  <div class="chatapp"><!-- navbar start -->
+    <nav id="navbar" class="navbar navbar-expand-md navbar-light fixed-top bg-white border-bottom shadow-sm"><a class="navbar-brand" href="index.html"><img src="/statics/assets/images/stu.svg" width="50" height="50" class="d-inline-block align-top" alt="">
+      <h1>小组讨论区</h1>
+      </a>
+      <div class="ml-auto d-flex align-items-center">
+        <div style="visibility:hidden" class="iconbox iconbox-search btn-hovered-light"><i class="iconbox__icon mdi mdi-magnify"></i></div>
+        <div class="navbar-nav">
+          <div class="iconbox-group">
+            <div style="visibility:hidden" class="iconbox btn-hovered-light"><i class="iconbox__icon mdi mdi-wallet-outline"></i></div>
+            <div class="iconbox btn-hovered-light"><i class="iconbox__icon mdi mdi-diamond-stone"></i></div>
+            <div class="iconbox btn-hovered-light"><i class="iconbox__icon mdi mdi-bell-ring-outline"></i></div>
+            <div class="iconbox btn-hovered-light"><i class="iconbox__icon mdi mdi-dots-vertical"></i></div>
+          </div>
+          <div class="dropdown user-nav">
+            <div class="user-avatar user-avatar-sm user-avatar-rounded" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div  class="user-avatar user-avatar-rounded avatar-info"><span>{{stu_info.0.name}}</span></div>
+            <div class="dropdown-menu dropdown-menu-right">
+			<a class="dropdown-item" href="javascript:;">
+			<span><i class="mdi mdi-account-outline"></i></span><span>个人信息</span>
+			</a>
+			<a class="dropdown-item" href="javascript:;">
+			<span><i class="mdi mdi-account-multiple-plus-outline"></i></span><span>Invite</span>
+			</a>
+			<a class="dropdown-item" href="javascript:;">
+			<span><i class="mdi mdi-settings-outline"></i></span><span>设置</span>
+			</a>
+			<a class="dropdown-item" href="javascript:;">
+			<span><i class="mdi mdi-help-circle-outline"></i></span><span>帮助</span>
+			</a>
+			<a class="dropdown-item" href="javascript:;">
+			<span><i class="mdi mdi-comment-quote-outline"></i></span><span>反馈</span>
+			</a>
+              <div class="dropdown-divider"></div>
+              <a href="/stutask/" class="dropdown-item">
+			  <span><i class="mdi mdi-logout-variant"></i></span><span>返回</span></a></div>
+          </div>
+          <div class="iconbox-searchbar">
+            <form>
+              <input type="text" class="form-control" placeholder="Search here..." autofocus>
+              <button class="search-submit" type="submit"><i class="mdi mdi-magnify"></i></button>
+              <a href="javascript:void(0)" class="search-close"><i class="mdi mdi-arrow-left"></i></a>
+            </form>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <!-- navbar end --><!-- sidebar start -->
+    <div class="chatapp__sidebar">
+      <ul class="nav" id="myTab" role="tablist">
+        <li class="nav-item"><a class="nav-link active" href="#"><i class="mdi mdi-message-text-outline"></i><span>讨论区</span></a></li>
+          {% if stu_info.0.power == '老师' %}
+           <li class="nav-item nav-item-todo"><a class="nav-link" href="/indextech/" ><i class="mdi mdi-checkbox-marked-outline"></i><span>返回主页</span></a></li>
+          {% elif stu_info.0.power == '管理员' %}
+          <li class="nav-item nav-item-todo"><a class="nav-link" href="/indextech/" ><i class="mdi mdi-checkbox-marked-outline"></i><span>返回主页</span></a></li>
+          {% else %}
+          <li class="nav-item nav-item-todo"><a class="nav-link" href="/stutask/" ><i class="mdi mdi-checkbox-marked-outline"></i><span>返回主页</span></a></li>
+          {% endif %}
+        <li style="visibility:hidden" class="nav-item"><a class="nav-link" href="#"><i class="mdi mdi-phone-outline"></i><span>联系</span></a></li>
+        <li  style="visibility:hidden" class="nav-item"><a class="nav-link" href="#"><i class="mdi mdi-account-box-outline"></i><span>成员列表</span></a></li>
+
+        <li class="nav-item sidebar-bottom-nav nav-item-help"><a class="nav-link" href="#" title="Help"><i class="mdi mdi-help-circle-outline"></i><span>帮助</span></a></li>
+      </ul>
+    </div>
+    <!-- sidebar end --><!-- main content start -->
+    <div class="chatapp__content">
+      <div class="chatapp__messagetab"><!-- user list start -->
+        <div class="chatapp-user-list">
+          <div class="chatapp-user-list-body custom-scrollbar">
+            <div class="chatapp__headingbar">
+              <h6>群组列表</h6>
+              <div class="chatapp__actions">
+                <div class="chatapp__actions--icon"><i class="mdi mdi-heart"></i></div>
+                <div class="chatapp__actions--icon"><i class="mdi mdi-square-edit-outline"></i></div>
+                <div class="chatapp__actions--icon"><i class="mdi mdi-dots-horizontal-circle-outline"></i></div>
+              </div>
+            </div>
+            <ul class="list-unstyled">
+              {%for item in member_list%}
+              <li>
+                <div class="conversation ">
+                  <div class="user-avatar user-avatar-rounded online">
+                    <div  class="user-avatar user-avatar-rounded avatar-info"><span>{{ item.name }}</span></div>
+                  </div>
+                  <div class="conversation__details">
+                    <div class="conversation__name">
+                      <div class="conversation__name--title">{{ item.group_role }}</div>
+                      <div class="conversation__time">{{ item.recent_talk }}</div>
+                    </div>
+                    <div class="conversation__message">
+                      {%if item.recent_content %}
+                      <div class="conversation__message-preview">{{ item.recent_content }}</div>
+                      {% else %}
+                      <div class="conversation__message-preview"></div>
+                      {% endif %}
+                      count:<span class="badge badge-primary badge-rounded">{{ item.talk_count }}</span>
+					</div>
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <!-- user list end --><!-- conversations start -->
+        <div class="chatapp__conversations"><!-- conversation wrapper start -->
+          <div class="conversation-wrapper">
+            <div class="conversation-panel">
+              <div class="conversation-panel__head">
+                <div class="back-button-md"><i class="mdi mdi-arrow-left"></i></div>
+                <div class="conversation-panel__avatar info-panel-opener">
+                  <div class="conversation__name">
+                    <div id="group_title" class="conversation__name--title">【公告栏】</div>
+                  </div>
+                </div>
+                <div class="conversation__actions">
+                  <div style="visibility:hidden" class="action-icon"  data-toggle="modal" data-target="#outGoingCall" data-backdrop="static" data-keyboard="false"><i class="mdi mdi-phone"></i></div>
+                  <div style="visibility:hidden" class="action-icon" data-toggle="modal" data-target="#incomingVideoStart" data-backdrop="static" data-keyboard="false"><i class="mdi mdi-video-outline"></i></div>
+                  <div class="dropdown">
+                    <div class="action-icon" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-dots-vertical"></i></div>
+                    <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item info-panel-opener" href="javascript:;"><span><i class="mdi mdi-information-outline"></i></span><span>查看文件</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-magnify"></i></span><span>查找</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-volume-mute"></i></span><span>Mute notifications</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-wallpaper"></i></span><span>Wallpaper</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-trash-can-outline"></i></span><span>Delete Chat</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-export-variant"></i></span><span>导出聊天记录</span></a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-cancel"></i></span><span>Block</span></a></div>
+                  </div>
+                </div>
+              </div>
+              <div class="conversation-panel__body" >
+                <div id="scrolldiv" class="custom-scrollbar2">
+                  <div class="container">
+                    <ul id="group_talk" class="chat-style-2">
+                      {%for talk in group_talk reversed%}
+                          {%if talk.send_type == '1'%}
+                                {%if talk.is_user == True%}
+                              <li class="message sent">
+                                <div class="message__text">{{talk.send_content}}
+                                  <div class="metadata"><span class="time">{{talk.send_time}}</span></div>
+                                </div>
+                                <div class="message__options"><i class="mdi mdi-dots-horizontal" ></i></div>
+                                <div class="user-avatar user-avatar-rounded">
+                                  <div  class="user-avatar user-avatar-rounded avatar-info"><span>{{talk.name}}</span></div>
+                                </div>
+                              </li>
+                              {%else %}
+                              <li class="message received">
+                                  <div  style="margin-right: 0px ;height:50px;width:50px"class="user-avatar user-avatar-rounded avatar-info"><span>{{talk.name}}</span></div>
+                                <div id="chat-log"  class="message__text">{{talk.send_content}}
+                                  <div class="metadata"><span class="time">{{talk.send_time}}</span></div>
+                                </div>
+                                <div class="message__options"><i class=" mdi mdi-dots-horizontal" ></i></div>
+                              </li>
+                              {% endif %}
+                        {% else %}
+                              {%if talk.is_user == True%}
+                                 {% if talk.file_type == 'pdf' %}
+                                <li class="message sent">
+                                  <div class="message__text">
+                                    <div class="doclist">
+                                        <div class="docicon iconbox btn-solid-danger"><i onclick="downloadfile('{{talk.id}}','{{talk.file_name}}')"  class="iconbox__icon mdi mdi-file-pdf-box"></i></div>
+                                        <div class="doctitle">
+                                          <div class="docname">{{talk.file_name}}</div>
+                                          <div class="docsize">{{talk.file_size}}KB</div>
+                                        </div>
+                                      </div>
+                                    <div class="metadata"><span class="time">{{talk.send_time}}</span></div>
+                                  </div>
+                                  <div class="message__options"><i class="mdi mdi-dots-horizontal" ></i></div>
+                                  <div class="user-avatar user-avatar-rounded">
+                                    <div  class="user-avatar user-avatar-rounded avatar-info"><span>{{talk.name}}</span></div>
+                                  </div>
+                                </li>
+                                 {% elif talk.file_type == 'xls' or talk.file_type == 'xlsx' %}
+                                <li class="message sent">
+                                  <div class="message__text">
+                                    <div class="doclist">
+                                        <div class="docicon iconbox btn-solid-success"><i onclick="downloadfile('{{talk.id}}','{{talk.file_name}}')" class="iconbox__icon mdi mdi-file-excel-box"></i></div>
+                                        <div class="doctitle">
+                                          <div class="docname">{{talk.file_name}}</div>
+                                          <div class="docsize">{{talk.file_size}}KB</div>
+                                        </div>
+                                      </div>
+                                    <div class="metadata"><span class="time">{{talk.send_time}}</span></div>
+                                  </div>
+                                  <div class="message__options"><i class="mdi mdi-dots-horizontal" ></i></div>
+                                  <div class="user-avatar user-avatar-rounded">
+                                    <div  class="user-avatar user-avatar-rounded avatar-info"><span>{{talk.name}}</span></div>
+                                  </div>
+                                </li>
+                                 {% elif talk.file_type == 'doc' or talk.file_type == 'docx' %}
+                                <li class="message sent">
+                                  <div class="message__text">
+                                    <div class="doclist">
+                                        <div class="docicon iconbox btn-solid-info"><i onclick="downloadfile('{{talk.id}}','{{talk.file_name}}')" class="iconbox__icon mdi mdi-file-word-box"></i></div>
+                                        <div class="doctitle">
+                                          <div class="docname">{{talk.file_name}}</div>
+                                          <div class="docsize">{{talk.file_size}}KB</div>
+                                        </div>
+                                      </div>
+                                    <div class="metadata"><span class="time">{{talk.send_time}}</span></div>
+                                  </div>
+                                  <div class="message__options"><i class="mdi mdi-dots-horizontal" ></i></div>
+                                  <div class="user-avatar user-avatar-rounded">
+                                    <div  class="user-avatar user-avatar-rounded avatar-info"><span>{{talk.name}}</span></div>
+                                  </div>
+                                </li>
+                                 {% elif talk.file_type == 'pptx' %}
+                                <li class="message sent">
+                                  <div class="message__text">
+                                    <div class="doclist">
+                                         <div class="docicon iconbox btn-solid-warning"><i onclick="downloadfile('{{talk.id}}','{{talk.file_name}}')" class="iconbox__icon mdi mdi-file-powerpoint-box"></i></div>
+                                        <div class="doctitle">
+                                          <div class="docname">{{talk.file_name}}</div>
+                                          <div class="docsize">{{talk.file_size}}KB</div>
+                                        </div>
+                                      </div>
+                                    <div class="metadata"><span class="time">{{talk.send_time}}</span></div>
+                                  </div>
+                                  <div class="message__options"><i class="mdi mdi-dots-horizontal" ></i></div>
+                                  <div class="user-avatar user-avatar-rounded">
+                                    <div  class="user-avatar user-avatar-rounded avatar-info"><span>{{talk.name}}</span></div>
+                                  </div>
+                                </li>
+                                 {% else %}
+                                  <li class="message sent">
+                                  <div class="message__text">
+                                    <div class="doclist">
+                                        <div class="docicon iconbox btn-solid-info"><i onclick="downloadfile('{{talk.id}}','{{talk.file_name}}')" class="iconbox__icon mdi mdi-file-word-box"></i></div>
+                                        <div class="doctitle">
+                                          <div class="docname">{{talk.file_name}}</div>
+                                          <div class="docsize">{{talk.file_size}}KB</div>
+                                        </div>
+                                      </div>
+                                    <div class="metadata"><span class="time">{{talk.send_time}}</span></div>
+                                  </div>
+                                  <div class="message__options"><i class="mdi mdi-dots-horizontal" ></i></div>
+                                  <div class="user-avatar user-avatar-rounded">
+                                    <div  class="user-avatar user-avatar-rounded avatar-info"><span>{{talk.name}}</span></div>
+                                  </div>
+                                </li>
+                                 {% endif %}
+                              {%else %}
+                                     {% if talk.file_type == 'pdf' %}
+                                        <li class="message received">
+                                            <div  style="margin-right: 0px ;height:50px;width:50px"class="user-avatar user-avatar-rounded avatar-info"><span>{{talk.name}}</span></div>
+                                               <div   class="message__text">
+                                                    <div class="doclist">
+                                                      <div class="docicon iconbox btn-solid-danger">
+                                                          <i onclick="downloadfile('{{talk.id}}','{{talk.file_name}}')"
+                                                             class="iconbox__icon mdi mdi-file-pdf-box"> </i>
+                                                      </div>
+                                                      <div class="doctitle">
+                                                        <div class="docname">{{talk.file_name}}</div>
+                                                        <div class="docsize">{{talk.file_size}}KB</div>
+                                                      </div>
+                                                    </div>
+                                                  <div class="metadata"><span class="time">{{talk.send_time}}</span></div>
+                                               </div>
+                                          <div class="message__options"><i class=" mdi mdi-dots-horizontal" ></i></div>
+                                        </li>
+                                     {% elif talk.file_type == 'xls' or talk.file_type == 'xlsx' %}
+                                         <li class="message received">
+                                            <div  style="margin-right: 0px ;height:50px;width:50px"class="user-avatar user-avatar-rounded avatar-info"><span>{{talk.name}}</span></div>
+                                               <div   class="message__text">
+                                                    <div class="doclist">
+                                                        <div class="docicon iconbox btn-solid-success"><i onclick="downloadfile('{{talk.id}}','{{talk.file_name}}')" class="iconbox__icon mdi mdi-file-excel-box"></i></div>
+                                                         <div class="doctitle">
+                                                        <div class="docname">{{talk.file_name}}</div>
+                                                        <div class="docsize">{{talk.file_size}}KB</div>
+                                                      </div>
+                                                    </div>
+                                                  <div class="metadata"><span class="time">{{talk.send_time}}</span></div>
+                                               </div>
+                                          <div class="message__options"><i class=" mdi mdi-dots-horizontal" ></i></div>
+                                        </li>
+                                     {% elif talk.file_type == 'doc' or talk.file_type == 'docx' %}
+                                          <li class="message received">
+                                            <div  style="margin-right: 0px ;height:50px;width:50px"class="user-avatar user-avatar-rounded avatar-info"><span>{{talk.name}}</span></div>
+                                               <div   class="message__text">
+                                                 <div class="doclist">
+                                                      <div class="docicon iconbox btn-solid-info"><i onclick="downloadfile('{{talk.id}}','{{talk.file_name}}')" class="iconbox__icon mdi mdi-file-word-box"></i></div>
+                                                      <div class="doctitle">
+                                                        <div class="docname">{{talk.file_name}}</div>
+                                                        <div class="docsize">{{talk.file_size}}KB</div>
+                                                      </div>
+                                                    </div>
+                                                  <div class="metadata"><span class="time">{{talk.send_time}}</span></div>
+                                               </div>
+                                          <div class="message__options"><i class=" mdi mdi-dots-horizontal" ></i></div>
+                                        </li>
+                                     {% elif talk.file_type == 'pptx' %}
+                                           <li class="message received">
+                                            <div  style="margin-right: 0px ;height:50px;width:50px"class="user-avatar user-avatar-rounded avatar-info"><span>{{talk.name}}</span></div>
+                                               <div   class="message__text">
+                                                    <div class="doclist">
+                                                       <div class="docicon iconbox btn-solid-warning"><i onclick="downloadfile('{{talk.id}}','{{talk.file_name}}')" class="iconbox__icon mdi mdi-file-powerpoint-box"></i></div>
+                                                        <div class="doctitle">
+                                                           <div class="docname">{{talk.file_name}}</div>
+                                                           <div class="docsize">{{talk.file_size}}KB</div>
+                                                      </div>
+                                                    </div>
+                                                  <div class="metadata"><span class="time">{{talk.send_time}}</span></div>
+                                               </div>
+                                          <div class="message__options"><i class=" mdi mdi-dots-horizontal" ></i></div>
+                                        </li>
+                                     {% else %}
+                                      <li class="message received">
+                                            <div  style="margin-right: 0px ;height:50px;width:50px"class="user-avatar user-avatar-rounded avatar-info"><span>{{talk.name}}</span></div>
+                                               <div   class="message__text">
+                                                 <div class="doclist">
+                                                      <div class="docicon iconbox btn-solid-info"><i onclick="downloadfile('{{talk.id}}','{{talk.file_name}}')" class="iconbox__icon mdi mdi-file-doc-box"></i></div>
+                                                      <div class="doctitle">
+                                                        <div class="docname">{{talk.file_name}}</div>
+                                                        <div class="docsize">{{talk.file_size}}KB</div>
+                                                      </div>
+                                                    </div>
+                                                  <div class="metadata"><span class="time">{{talk.send_time}}</span></div>
+                                               </div>
+                                          <div class="message__options"><i class=" mdi mdi-dots-horizontal" ></i></div>
+                                        </li>
+                                     {% endif %}
+                              {% endif %}
+                           {% endif %}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="conversation-panel__footer">
+                <div class="composer">
+                  <div class="composer__left">
+                    <div  class="composer__left--sticker"><i class="mdi mdi-sticker-emoji"></i></div>
+                    <div  class="composer__left--emoticon"><i class="mdi mdi-emoticon-outline"></i></div>
+                  </div>
+                  <div class="composer__middle">
+                    <textarea id="chat-message-input" type="text" class="form-control" rows="1" placeholder="编辑消息..."></textarea>
+                    <div style="visibility:hidden" class="composer__middle--microphone"><i class="mdi mdi-microphone"></i></div>
+                    <div style="visibility:hidden" class="composer__middle--photo"><i class="mdi mdi-camera"></i></div>
+                    <div class="composer__middle--attachment">
+                       <label class="mdi mdi-attachment" for="xFile"></label>
+                       <input type="file" id="xFile"
+                              onchange="change()"
+                              style="position:absolute;clip:rect(0 0 0 0);" multiple="true">
+                    </div>
+                  </div>
+                  <div class="composer__right">
+                    <div id="chat-message-submit" type="button"  class="composer__right--send"><i class="mdi mdi-send"></i></div>
+                    <div class="composer__right--microphone"><i class="mdi mdi-microphone"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- conversation panel end --><!-- information panel start -->
+          <div class="information-panel">
+            <div class="information-panel__head">
+              <h5>文件发布信息</h5>
+              <div class="information-panel__closer"><i class="mdi mdi-close"></i></div>
+            </div>
+            <div class="information-panel__body custom-scrollbar">
+              <div class="accordion accordion-ungrouped mb-3" id="accordionExample">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <div class="card-title collapsed d-flex justify-content-between align-items-center"  role="button" data-toggle="collapse" data-target="#collapseTwo"                                                aria-expanded="false" aria-controls="collapseTwo">
+                      <div class="acpanel__heading">
+                        <div class="acpanel__left"><span><i class="mdi mdi-file-document-outline"></i></span><span>Documents</span></div>
+                        <div class="acpanel__right"><span class="badge badge-info">16</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                      <ul class="list-unstyled documentlist-wrapper">
+                        {% for item in group_talk%}
+                          {% if item.send_type == '2' %}
+                              {% if item.file_type == 'pdf' %}
+                                             <li>
+                                              <div class="doclist">
+                                                <div class="docicon iconbox btn-solid-danger"><i onclick="downloadfile('{{item.id}}','{{item.file_name}}')" class="iconbox__icon mdi mdi-file-pdf-box"></i></div>
+                                                <div class="doctitle">
+                                                  <div class="docname">{{item.file_name}}</div>
+                                                  <div class="docsize">{{item.file_size}}</div>
+                                                </div>
+                                              </div>
+                                            </li>
+                                     {% elif item.file_type == 'xls' or talk.file_type == 'xlsx' %}
+                                             <li>
+                                                                  <div class="doclist">
+                                                                    <div class="docicon iconbox btn-solid-success"><i onclick="downloadfile('{{item.id}}','{{item.file_name}}')" class="iconbox__icon mdi mdi-file-excel-box"></i></div>
+                                                                    <div class="doctitle">
+                                                                      <div class="docname">{{item.file_name}}</div>
+                                                                      <div class="docsize">{{item.file_size}}KB</div>
+                                                                    </div>
+                                                                  </div>
+                                                                </li>
+                                     {% elif item.file_type == 'doc' or talk.file_type == 'docx' %}
+                                             <li>
+                                                                  <div class="doclist">
+                                                                    <div class="docicon iconbox btn-solid-info"><i onclick="downloadfile('{{item.id}}','{{item.file_name}}')" class="iconbox__icon mdi mdi-file-word-box"></i></div>
+                                                                    <div class="doctitle">
+                                                                      <div class="docname">{{item.file_name}}</div>
+                                                                      <div class="docsize">{{item.file_size}}KB</div>
+                                                                    </div>
+                                                                  </div>
+                                                                </li>
+                                     {% elif item.file_type == 'pptx' %}
+                                             <li>
+                                                                  <div class="doclist">
+                                                                    <div class="docicon iconbox btn-solid-warning"><i onclick="downloadfile('{{item.id}}','{{item.file_name}}')" class="iconbox__icon mdi mdi-file-powerpoint-box"></i></div>
+                                                                    <div class="doctitle">
+                                                                      <div class="docname">{{item.file_name}}</div>
+                                                                      <div class="docsize">{{item.file_size}}KB</div>
+                                                                    </div>
+                                                                  </div>
+                                                                </li>
+                                     {% else %}
+                                             <li>
+                                              <div class="doclist">
+                                                <div class="docicon iconbox btn-solid-info"><i onclick="downloadfile('{{item.id}}','{{item.file_name}}')" class="iconbox__icon mdi mdi-file-word-box"></i></div>
+                                                <div class="doctitle">
+                                                  <div class="docname">{{item.file_name}}</div>
+                                                  <div class="docsize">{{item.file_size}}KB</div>
+                                                </div>
+                                              </div>
+                                            </li>
+                                     {% endif %}
+
+                          {% endif %}
+                        {% endfor %}
+                        <li>
+                          <div class="doclistall">View All</div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- information panel end --></div>
+        <!-- conversations end --></div>
+    </div>
+    <!-- main content end --></div>
+<!-- VIDEO CALL START-->
+  <div class="modal fade videocall-modal CallDialogFullscreen-sm" id="incomingVideoStart" tabindex="-1" role="dialog" aria-labelledby="incomingVideoStart" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="icvideocallwrapper">
+            <div class="icvideo-contact"><img class="img-fluid icvideo-contact__inner" src="assets/images/media/call-01.jpg" alt=""></div>
+            <div class="icvideo-user"><img src="assets/images/user/150/01.jpg" alt=""></div>
+            <div class="icvideo-actions">
+              <div class="icvideo-actions__left">
+                <div class="icvideo-actions__left--duration">00:36</div>
+              </div>
+              <div class="icvideo-actions__middle">
+                <div class="">
+                  <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Speaker"><i class="iconbox__icon mdi mdi-volume-high"></i></div>
+                  <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Hold"><i class="iconbox__icon mdi mdi-pause"></i></div>
+                  <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Add Call"><i class="iconbox__icon mdi mdi-phone-plus"></i></div>
+                  <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Disbale Video"><i class="iconbox__icon mdi mdi-video-off-outline"></i></div>
+                  <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Mute"><i class="iconbox__icon mdi mdi-microphone-off"></i></div>
+                </div>
+              </div>
+              <div class="icvideo-actions__right">
+                <div class="iconbox btn-hovered-light bg-danger" data-dismiss="modal"  data-toggle="tooltip" data-placement="top" title="Hangup"><i class="iconbox__icon text-white mdi mdi-phone-hangup"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- OUTGOING VOICE CALL -->
+  <div class="modal CallDialogFullscreen-sm" id="outGoingCall" tabindex="-1" role="dialog" aria-labelledby="outGoingCall" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="text-center">
+            <div class="user-avatar user-avatar-rounded user-avatar-xl"><img src="assets/images/user/80/01.jpg" alt=""></div>
+            <div class="userprofile-name"><span>Calling...</span>
+              <h4>Jack P. Angulo</h4>
+              <span>Product Manager</span>
+              <div class="call-duration">00:36</div>
+            </div>
+            <div class="call-options">
+              <div class="row">
+                <div class="col-4">
+                  <div class="call-options__iconbox"><i class="mdi mdi-microphone-off"></i></div>
+                  <h6>Mute</h6>
+                </div>
+                <div class="col-4">
+                  <div class="call-options__iconbox"><i class="mdi mdi-volume-high"></i></div>
+                  <h6>Speaker</h6>
+                </div>
+                <div class="col-4">
+                  <div class="call-options__iconbox"><i class="mdi mdi-pause"></i></div>
+                  <h6>Hold</h6>
+                </div>
+              </div>
+            </div>
+            <div class="call-actions">
+              <div class="call-hangup" data-dismiss="modal"><i class="mdi mdi-phone-hangup"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ room_name|json_script:"room-name" }}
+{{ stu_info |json_script:"stu_info" }}
+<!-- main wrapper end -->
+	<!-- Javascripts Files -->
+
+	<script src="/statics/dist/js/jquery-3.3.1.slim.min.js" ></script>
+   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="/statics/dist/js/popper.min.js" ></script>
+	<script src="/statics/assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+	<script src="/statics/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="/statics/assets/vendors/material-floating-button/dist/mfb.min.js"></script>
+	<script src="/statics/dist/js/main.min.js"></script>
+    <script src="/statics/techinit/chat.js"></script>
+
+</body>
+</html>

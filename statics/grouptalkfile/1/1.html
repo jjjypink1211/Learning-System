@@ -1,0 +1,54 @@
+<html>
+<head>
+    <title>Title</title>
+    <script src="https://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js">
+</script>
+</head>
+<body>
+<form enctype="multipart/form-data" id="form_example">
+    <input type="file" id="file" multiple/><br/><br/>
+    <input type="submit" value="提交"/>
+</form>
+  
+<div id='file-list-display'></div>
+</body>
+</html>
+<script type="text/javascript">
+        var fileList = [];
+        var fileCatcher = document.getElementById('form_example');
+        var files = document.getElementById("file"), renderFileList;
+        var fileListDisplay = document.getElementById('file-list-display'), sendFile;
+  
+        fileCatcher.addEventListener("submit", function (event) {
+            event.preventDefault();
+            //上传文件
+            sendFile();
+        });
+  
+        files.addEventListener("change", function (event) {
+            console.log(file.files)
+            for (var i = 0; i < files.files.length; i++) {
+                fileList.push(files.files[i]);
+            }
+            renderFileList();
+        });
+  
+function sendFile() {
+            var formData = new FormData();
+            var request = new XMLHttpRequest();
+            //循环添加到formData中
+            fileList.forEach(function (file) {
+                formData.append('file', file, file.name);
+            })
+            request.open("POST", "http://***********/***");
+            request.send(formData);
+        }
+function renderFileList() {
+            fileListDisplay.innerHTML = '';
+            fileList.forEach(function (file, index) {
+                var fileDisplayEl = document.createElement("p");
+                fileDisplayEl.innerHTML = (index + 1) + ":" + file.name;
+                fileListDisplay.appendChild(fileDisplayEl);
+            })
+        };
+</script>

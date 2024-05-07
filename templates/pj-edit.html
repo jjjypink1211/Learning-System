@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>评价管理</title>
+     {% load static %}
+<script src="https://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" /> 
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="/statics/bootstrap/bootstrapValidator.css">
+    <script type="text/javascript" src="/statics/bootstrap/bootstrapValidator.js"></script>
+    <script src="/statics/javascripts/ruku.js"></script>
+<style type="text/css">
+    body{background: url(/images/bg.jpg) no-repeat;background-size:cover;}  
+ .container{
+    display:table;
+    height:100%;
+
+}
+.row{
+    display: table-cell;
+    vertical-align: middle;
+}
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align:left;
+    margin-right:-4px;
+}
+</style>
+</head>
+<body>
+{% csrf_token %}
+<div class="container">
+	<div class="row row-centered">
+		<div class="well col-md-7 col-centered" style="margin-top: 50px;">
+    <form id="defaultForm" method="POST" class="form-horizontal center-block" role="form">
+	<legend>添加评价</legend>
+		<div class="form-group ">
+        <label class="col-sm-2 control-label" >评价编号 <sup>*</sup></label>
+        <div  class="col-sm-4 ">
+           <input class="form-control" name="bh" id="bh" type="text" placeholder="请输入评价编号"/>
+        </div>
+        <label class="col-sm-2 control-label" >序号 </label>
+            <div  class="col-sm-4 ">
+               <input class="form-control" name="id" id="id" type="text" readonly="readonly" placeholder="序号"/>
+            </div>
+        </div>
+     <div class="form-group ">
+	 <label class="col-sm-2 control-label" >评价类别 <sup>*</sup></label>
+	  <div class="col-sm-4">
+	     <select id="evalute_type" class="form-control" name="type">
+          <option value="">--请选择评价类别--</option>
+	      <option value="成员互评">成员互评</option>
+	      <option value="组间互评">组间互评</option>
+          <option value="多元评价">多元评价</option>
+          <option value="教师评价">教师评价</option>
+          <option value="组内评价">组内评价</option>
+          <option value="个人评价">个人评价</option>
+             <option value="其他">其他</option>
+	   </select>
+    </div>
+    <div class="col-sm-4" id="qtlb">
+
+    </div>
+    <script>
+        document.getElementById('evalute_type').onchange = function(){
+            var value =this[this.selectedIndex].value,str = '';
+            if(value){
+                switch(value){
+                    case '其他':
+                        str = '<input class="form-control" id="ds_host" type="text" placeholder="请输入其他类别"/>';
+                        break;
+                }   
+                document.getElementById('qtlb').innerHTML = str;
+            }
+        };
+    </script>
+    </div>
+    <div class="form-group ">
+        <label class="col-sm-2 control-label" >评价内容 <sup>*</sup></label>
+        <div class="col-sm-4">
+            <textarea class="form-control" name="pj-content" id="pj_content" row="3" placeholder="请输入评价内容"></textarea>
+        </div>
+     </div>
+        <div class="form-group ">
+        <label class="col-sm-2 control-label" >权重</label>
+        <div class="col-sm-4">
+             <select id="weight" class="form-control" name="weight">
+              <option value="">--请选择权重--</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+           </select>
+         </div>
+             <label class="col-sm-2 control-label" >题目类型</label>
+        <div class="col-sm-4">
+             <select id="struct_type" class="form-control" name="struct_type">
+              <option value="0">--请选择类型--</option>
+              <option value="1">分值</option>
+              <option value="2">时长</option>
+           </select>
+         </div>
+     </div>
+     <div class="form-group ">
+        <label class="col-sm-2 control-label" >操作员</label>
+        <div class="col-sm-4">
+            <input class="form-control" name="oper" id="ds_sl" type="text" value="{{ name }}" readonly="readonly"  placeholder="默认管理员"/>
+      </div>
+      <label class="col-sm-2 control-label" >日期</label>
+        <div class="col-sm-4">
+            <input class="form-control" name="pub-time" id="ds_rq" type="text" readonly="readonly" placeholder="默认输入日期"/>
+      </div>
+     </div>
+  <div class="form-group ">
+        <label class="col-sm-2 control-label" > </label>
+        <div class="col-sm-4">
+       		<input class="btn btn-default pull-right" onclick="back()" id="exit" type="button" value="退出"/>
+        </div>
+        <div class="col-sm-4">
+            <button type="submit" id="submit" onclick="login()" class="btn btn-primary">保存</button>
+            <button type="button" class="btn btn-info" id="resetBtn">重置表单</button>
+        </div>
+        
+        </div>
+     </form>
+
+	    </div>
+	</div>
+</div>
+<script type="text/javascript">
+    function login() {
+     var csrf = $('input[name="csrfmiddlewaretoken"]').val();
+     bd=$('#defaultForm').serialize();
+     var evaluate_id=$("input[name='bh']").val();
+     var id=$("input[name='id']").val();
+     var evaluate_type=$("select[name='type']").val();
+     var pub_time=$("input[name='pub-time']").val();
+     var evaluate_weight=$("select[name='weight']").val();
+     var struct_type=$("select[name='struct_type']").val();
+     var evaluate_item=$("textarea[name='pj-content']").val();
+        $.ajax({
+        //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/pj-tijiao/" ,//url
+            data: { 'evaluate_id':evaluate_id,
+            'id': id,
+            'evaluate_type':evaluate_type,
+            'pub_time':pub_time,
+            'evaluate_weight':evaluate_weight,
+            'struct_type':struct_type,
+            'evaluate_item':evaluate_item
+            ,'csrfmiddlewaretoken':csrf},
+            success: function (result) {
+                console.log(result.msg);//打印服务端返回的数据(调试用)
+                if (result.resultCode == 200) {
+                    alert("评价信息提交成功！！");
+                    location.href='/pjgl/'
+                }
+                if(result.resultCode==-1){
+                    alert(result.msg);
+                }
+                
+            },
+            error : function() {
+                alert("异常！");
+            }
+        });
+    }
+    function back()
+    {
+        location.href='/login'
+             
+    }
+</script>
+</body>
+</html>

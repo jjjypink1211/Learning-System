@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>学生界面</title>
+<meta name="description" content="The ultimate Bootstrap based Messaging framework to help build Messaging or Chat application fast and easy. Fully responsive and crafted with modern elements and latest design">
+<meta name="keywords" content="Chatriq, chat, messaging, theme, platform"/>
+<meta name="subject" content="">
+<meta name="copyright" content="">
+<link rel="icon" href="/statics/assets/images/stu.svg" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="/statics/dist/css/materialdesignicons.min.css">
+<link rel="stylesheet" type="text/css" href=""/>
+<link rel="stylesheet" type="text/css" href="/statics/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+<link rel="stylesheet" type="text/css" href="/statics/dist/css/app.min.css">
+<link rel="stylesheet" type="text/css" href="/statics/dist/css/theme/default-theme.min.css">
+</head>
+<body class="default-theme">
+<!-- Preloader Start -->
+<div class="preloader"></div>
+<!-- Preloader end --><!-- main wrapper start -->
+<div class="main-wrapper">
+  <div class="chatapp"><!-- navbar start -->
+    <nav id="navbar" class="navbar navbar-expand-md navbar-light fixed-top bg-white border-bottom shadow-sm"><a class="navbar-brand" href="/stuchat/"><img src="/statics/assets/images/stu.svg" width="50" height="50" class="d-inline-block align-top" alt="">
+      <h1>学生:{{ name }}</h1>
+      </a>
+      <div class="ml-auto d-flex align-items-center">
+        <div class="iconbox iconbox-search btn-hovered-light"><i class="iconbox__icon mdi mdi-magnify"></i></div>
+        <div class="navbar-nav">
+          <div class="iconbox-group">
+            <div class="iconbox btn-hovered-light"><i class="iconbox__icon mdi mdi-wallet-outline"></i></div>
+            <div class="iconbox btn-hovered-light"><i class="iconbox__icon mdi mdi-diamond-stone"></i></div>
+            <div class="iconbox btn-hovered-light"><i class="iconbox__icon mdi mdi-bell-ring-outline"></i></div>
+            <div class="iconbox btn-hovered-light"><i class="iconbox__icon mdi mdi-dots-vertical"></i></div>
+          </div>
+          <div class="dropdown user-nav">
+            <div class="user-avatar user-avatar-sm user-avatar-rounded" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div  class="user-avatar user-avatar-rounded avatar-info"><span>{{ name }}</span></div>
+            </div>
+            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-account-outline"></i></span><span>Profile</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-account-multiple-plus-outline"></i></span><span>Invite People</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-settings-outline"></i></span><span>Settings</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-help-circle-outline"></i></span><span>Help</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-comment-quote-outline"></i></span><span>Feedback</span></a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-logout-variant"></i></span><span>Logout</span></a></div>
+          </div>
+          <div class="iconbox-searchbar">
+            <form>
+              <input type="text" class="form-control" placeholder="Search here..." autofocus>
+              <button class="search-submit" type="submit"><i class="mdi mdi-magnify"></i></button>
+              <a href="javascript:void(0)" class="search-close"><i class="mdi mdi-arrow-left"></i></a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- navbar end --><!-- sidebar start -->
+    <div class="chatapp__sidebar">
+      <ul class="nav" id="myTab" role="tablist">
+        <li class="nav-item"><a class="nav-link active" href="/stuchat/"><i class="mdi mdi-message-text-outline"></i><span>讨论区</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="/stucalls/"><i class="mdi mdi-phone-outline"></i><span>联系</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="/stucontacts/"><i class="mdi mdi-account-box-outline"></i><span>成员列表</span></a></li>
+        <li class="nav-item nav-item-todo"><a class="nav-link" href="/stutask/" ><i class="mdi mdi-checkbox-marked-outline"></i><span>任务管理</span></a></li>
+        <li class="nav-item sidebar-bottom-nav nav-item-help"><a class="nav-link" href="help.html" title="Help"><i class="mdi mdi-help-circle-outline"></i><span>帮助</span></a></li>
+      </ul>
+    </div>
+    <!-- sidebar end --><!-- main content start -->
+    <div class="chatapp__content">
+      <div class="chatapp__messagetab"><!-- user list start -->
+        <div class="chatapp-user-list">
+          <div class="chatapp-user-list-body custom-scrollbar">
+            <div class="chatapp__headingbar">
+              <h6>消息栏</h6>
+              <div class="chatapp__actions">
+                <div class="chatapp__actions--icon"><i class="mdi mdi-heart"></i></div>
+                <div class="chatapp__actions--icon"><i class="mdi mdi-square-edit-outline"></i></div>
+                <div class="chatapp__actions--icon"><i class="mdi mdi-dots-horizontal-circle-outline"></i></div>
+              </div>
+            </div>
+            <ul class="list-unstyled">
+              <li class="active">
+                <div class="conversation ">
+                  <div class="user-avatar user-avatar-rounded online">
+                    <div  class="user-avatar user-avatar-rounded avatar-info"><span>小明</span></div>
+                  </div>
+                  <div class="conversation__details">
+                    <div class="conversation__name">
+                      <div class="conversation__name--title">小明-组长</div>
+                      <div class="conversation__time">07:15 PM</div>
+                    </div>
+                    <div class="conversation__message">
+                      <div class="conversation__message-preview">请尽快提交学习材料</div>
+                      <span><i class="mdi mdi-pin"></i></span></div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="conversation">
+                  <div class="user-avatar user-avatar-rounded online">
+                    <div  class="user-avatar user-avatar-rounded avatar-info"><span>小张</span></div>
+                  </div>
+                  <div class="conversation__details">
+                    <div class="conversation__name"><span class="conversation__name--title">小张-检察员</span><span class="conversation__time">07:15 PM</span></div>
+                    <div class="conversation__message">
+                      <div class="conversation__message-preview">材料整理得如何？</div>
+                      <span><i class="mdi mdi-volume-mute"></i></span><span class="badge badge-primary badge-rounded">9</span></div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="conversation">
+                  <div class="user-avatar user-avatar-rounded offline">
+                    <div  class="user-avatar user-avatar-rounded avatar-info"><span>小李</span></div>
+                  </div>
+                  <div class="conversation__details">
+                    <div class="conversation__name">
+                      <div class="conversation__name--title">小李-记录员</div>
+                      <div class="conversation__time">07:15 PM</div>
+                    </div>
+                    <div class="conversation__message">
+                      <div class="conversation__message-preview">会议记录整理完毕</div>
+                      <span><i class="mdi mdi-volume-mute"></i></span></div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="conversation">
+                  <div class="user-avatar user-avatar-rounded recently-active">
+                    <div  class="user-avatar user-avatar-rounded avatar-info"><span>小赵</span></div>
+                  </div>
+                  <div class="conversation__details">
+                    <div class="conversation__name">
+                      <div class="conversation__name--title">小赵-报告员</div>
+                      <div class="conversation__time">Yesterday</div>
+                    </div>
+                    <div class="conversation__message">
+                      <div class="conversation__message-preview">汇报ppt整理得怎么样了？</div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <ul id="mfbMenu" class="mfb-component--br mfb-slidein-spring" data-mfb-toggle="click">
+            <li class="mfb-component__wrap"><a href="#" class="mfb-component__button--main"><i class="mfb-component__main-icon--resting mdi mdi-plus ion-plus-round"></i><i class="mfb-component__main-icon--active mdi mdi-close ion-close-round"></i></a>
+              <ul class="mfb-component__list">
+                <li><a href="javascript:;"  data-mfb-label="主题" class="mfb-component__button--child"><i class="mfb-component__child-icon mdi mdi-palette"></i></a></li>
+                <li><a href="javascript:;"  data-mfb-label="建立群组" class="mfb-component__button--child"><i class="mfb-component__child-icon mdi mdi-account-group"></i></a></li>
+                <li><a href="javascript:;"  data-mfb-label="电话" class="mfb-component__button--child"><i class="mfb-component__child-icon mdi mdi-phone"></i></a></li>
+                <li><a href="javascript:;"  data-mfb-label="发起讨论" class="mfb-component__button--child"><i class="mfb-component__child-icon mdi mdi-android-messages"></i></a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- user list end --><!-- conversations start -->
+        <div class="chatapp__conversations"><!-- conversation wrapper start -->
+          <div class="conversation-wrapper">
+            <div class="conversation-panel">
+              <div class="conversation-panel__head">
+                <div class="back-button-md"><i class="mdi mdi-arrow-left"></i></div>
+                <div class="conversation-panel__avatar info-panel-opener">
+                  <div class="user-avatar user-avatar-rounded">
+                    <div  class="user-avatar user-avatar-rounded avatar-info"><span>小明</span></div>
+                  </div>
+                  <div class="conversation__name">
+                    <div class="conversation__name--title">小明-组长</div>
+                    <div class="conversation__time">最近聊天于 07:15 PM</div>
+                  </div>
+                </div>
+                <div class="conversation__actions">
+                  <div class="action-icon"  data-toggle="modal" data-target="#outGoingCall" data-backdrop="static" data-keyboard="false"><i class="mdi mdi-phone"></i></div>
+                  <div class="action-icon" data-toggle="modal" data-target="#incomingVideoStart" data-backdrop="static" data-keyboard="false"><i class="mdi mdi-video-outline"></i></div>
+                  <div class="dropdown">
+                    <div class="action-icon" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-dots-vertical"></i></div>
+                    <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item info-panel-opener" href="javascript:;"><span><i class="mdi mdi-information-outline"></i></span><span>View Contact</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-magnify"></i></span><span>Search</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-volume-mute"></i></span><span>Mute notifications</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-wallpaper"></i></span><span>Wallpaper</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-trash-can-outline"></i></span><span>Delete Chat</span></a><a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-export-variant"></i></span><span>Export Chat</span></a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="javascript:;"><span><i class="mdi mdi-cancel"></i></span><span>Block</span></a></div>
+                  </div>
+                </div>
+              </div>
+              <div class="conversation-panel__body" >
+                <div class="custom-scrollbar2">
+                  <div class="container">
+                    <ul class="chat-style-2">
+                      <li class="message sent">
+                        <div class="message__text">你好
+                          <div class="metadata"><span class="time">07:14 PM</span></div>
+                        </div>
+                        <div class="message__options"><i class=" mdi mdi-dots-horizontal" ></i></div>
+                      </li>
+                      <li class="message received">
+                        <div class="message__text">你好
+                          <div class="metadata"><span class="time">07:15 PM</span></div>
+                        </div>
+                        <div class="message__options"><i class=" mdi mdi-dots-horizontal" ></i></div>
+                      </li>
+                      <li class="message received">
+                        <div class="message__text">对了
+                          <div class="metadata"><span class="time">07:15 PM</span></div>
+                        </div>
+                        <div class="message__options"><i class=" mdi mdi-dots-horizontal" ></i></div>
+                      </li>
+                      <li class="message received">
+                        <div class="message__text">请尽快提交学习材料
+                          <div class="metadata"><span class="time">07:15 PM</span></div>
+                        </div>
+                        <div class="message__options"><i class=" mdi mdi-dots-horizontal" ></i></div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="conversation-panel__footer">
+                <div class="composer">
+                  <div class="composer__left">
+                    <div class="composer__left--sticker"><i class="mdi mdi-sticker-emoji"></i></div>
+                    <div class="composer__left--emoticon"><i class="mdi mdi-emoticon-outline"></i></div>
+                  </div>
+                  <div class="composer__middle">
+                    <textarea class="form-control" rows="1" placeholder="编辑消息..."></textarea>
+                    <div class="composer__middle--microphone"><i class="mdi mdi-microphone"></i></div>
+                    <div class="composer__middle--photo"><i class="mdi mdi-camera"></i></div>
+                    <div class="composer__middle--attachment"><i class="mdi mdi-attachment"></i></div>
+                  </div>
+                  <div class="composer__right">
+                    <div class="composer__right--send"><i class="mdi mdi-send"></i></div>
+                    <div class="composer__right--microphone"><i class="mdi mdi-microphone"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- conversation panel end --><!-- information panel start -->
+          <div class="information-panel">
+            <div class="information-panel__head">
+              <h5>Contact info</h5>
+              <div class="information-panel__closer"><i class="mdi mdi-close"></i></div>
+            </div>
+            <div class="information-panel__body custom-scrollbar">
+              <div class="userprofile-avatar"><img src="assets/images/user/150/01.jpg" alt=""></div>
+              <div class="userprofile-name">
+                <h4>Jack P. Angulo</h4>
+                <span>Product Manager</span>
+                <div class="social-icon-box">
+                  <div class="social-icon"><i class="mdi mdi-facebook"></i></div>
+                  <div class="social-icon"><i class="mdi mdi-linkedin"></i></div>
+                  <div class="social-icon"><i class="mdi mdi-twitter"></i></div>
+                  <div class="social-icon"><i class="mdi mdi-youtube"></i></div>
+                </div>
+              </div>
+              <hr>
+              <table class="table table-sm table-borderless user-table-info">
+                <tr>
+                  <td><i class="mdi mdi-cellphone-android"></i></td>
+                  <td>+91 99041-99041</td>
+                </tr>
+                <tr>
+                  <td><i class="mdi mdi-web"></i></td>
+                  <td>www.jackangulo.com</td>
+                </tr>
+                <tr>
+                  <td><i class="mdi mdi-map-marker"></i></td>
+                  <td>2519  Burnside Court, HORICON, WI, 53032</td>
+                </tr>
+              </table>
+              <hr>
+              <div class="accordion accordion-ungrouped mb-3" id="accordionExample">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <div class="card-title" data-toggle="collapse" role="button"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <div class="acpanel__heading">
+                        <div class="acpanel__left"><span><i class="mdi mdi-camera-outline"></i></span><span>Photos & Media</span></div>
+                        <div class="acpanel__right"><span class="badge badge-info">26</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                      <div class="slick-slider">
+                        <div><img class="img-fluid" src="assets/images/media/01.jpg" alt=""></div>
+                        <div><img class="img-fluid" src="assets/images/media/02.jpg" alt=""></div>
+                        <div><img class="img-fluid" src="assets/images/media/03.png" alt=""></div>
+                        <div><img class="img-fluid" src="assets/images/media/04.jpg" alt=""></div>
+                        <div><img class="img-fluid" src="assets/images/media/05.jpg" alt=""></div>
+                        <div><img class="img-fluid" src="assets/images/media/06.jpg" alt=""></div>
+                        <div><img class="img-fluid" src="assets/images/media/07.jpg" alt=""></div>
+                        <div><img class="img-fluid" src="assets/images/media/04.jpg" alt=""></div>
+                        <div><img class="img-fluid" src="assets/images/media/02.jpg" alt=""></div>
+                        <div><img class="img-fluid" src="assets/images/media/04.jpg" alt=""></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <div class="card-title collapsed d-flex justify-content-between align-items-center"  role="button" data-toggle="collapse" data-target="#collapseTwo"                                                aria-expanded="false" aria-controls="collapseTwo">
+                      <div class="acpanel__heading">
+                        <div class="acpanel__left"><span><i class="mdi mdi-file-document-outline"></i></span><span>Documents</span></div>
+                        <div class="acpanel__right"><span class="badge badge-info">16</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                      <ul class="list-unstyled documentlist-wrapper">
+                        <li>
+                          <div class="doclist">
+                            <div class="docicon iconbox btn-solid-danger"><i class="iconbox__icon mdi mdi-file-pdf-box"></i></div>
+                            <div class="doctitle">
+                              <div class="docname">example-file.pdf</div>
+                              <div class="docsize">217kb</div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="doclist">
+                            <div class="docicon iconbox btn-solid-info"><i class="iconbox__icon mdi mdi-file-word-box"></i></div>
+                            <div class="doctitle">
+                              <div class="docname">example-file.docs</div>
+                              <div class="docsize">217kb</div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="doclist">
+                            <div class="docicon iconbox btn-solid-success"><i class="iconbox__icon mdi mdi-file-excel-box"></i></div>
+                            <div class="doctitle">
+                              <div class="docname">example-file.xlxs</div>
+                              <div class="docsize">217kb</div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="doclist">
+                            <div class="docicon iconbox btn-solid-warning"><i class="iconbox__icon mdi mdi-file-powerpoint-box"></i></div>
+                            <div class="doctitle">
+                              <div class="docname">example-file.pptx</div>
+                              <div class="docsize">217kb</div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="doclistall">View All</div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingFour">
+                    <div class="card-title collapsed  d-flex justify-content-between align-items-center" role="button"  data-toggle="collapse" data-target="#collapseFour"                                                aria-expanded="false" aria-controls="collapseFour">
+                      <div class="acpanel__heading">
+                        <div class="acpanel__left"><span><i class="mdi mdi-settings-outline"></i></span><span>Settings</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                      <ul class="list-unstyled">
+                        <li>
+                          <div class="setting-list">
+                            <div class="setting-list-name">Media Auto Download</div>
+                            <div class="setting-list-switch">
+                              <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                <label class="custom-control-label" for="customSwitch1"></label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="setting-list">
+                            <div class="setting-list-name">Mute Conversation</div>
+                            <div class="setting-list-switch">
+                              <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch2">
+                                <label class="custom-control-label" for="customSwitch2"></label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="setting-list">
+                            <div class="setting-list-name">Notifications</div>
+                            <div class="setting-list-switch">
+                              <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch3">
+                                <label class="custom-control-label" for="customSwitch3"></label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="setting-list">
+                            <div class="setting-list-name">Block</div>
+                            <div class="setting-list-switch">
+                              <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch4">
+                                <label class="custom-control-label" for="customSwitch4"></label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- information panel end --></div>
+        <!-- conversations end --></div>
+    </div>
+    <!-- main content end --></div>
+  <!-- VIDEO CALL START-->
+  <div class="modal fade videocall-modal CallDialogFullscreen-sm" id="incomingVideoStart" tabindex="-1" role="dialog" aria-labelledby="incomingVideoStart" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="icvideocallwrapper">
+            <div class="icvideo-contact"><img class="img-fluid icvideo-contact__inner" src="assets/images/media/call-01.jpg" alt=""></div>
+            <div class="icvideo-user"><img src="assets/images/user/150/01.jpg" alt=""></div>
+            <div class="icvideo-actions">
+              <div class="icvideo-actions__left">
+                <div class="icvideo-actions__left--duration">00:36</div>
+              </div>
+              <div class="icvideo-actions__middle">
+                <div class="">
+                  <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Speaker"><i class="iconbox__icon mdi mdi-volume-high"></i></div>
+                  <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Hold"><i class="iconbox__icon mdi mdi-pause"></i></div>
+                  <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Add Call"><i class="iconbox__icon mdi mdi-phone-plus"></i></div>
+                  <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Disbale Video"><i class="iconbox__icon mdi mdi-video-off-outline"></i></div>
+                  <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Mute"><i class="iconbox__icon mdi mdi-microphone-off"></i></div>
+                </div>
+              </div>
+              <div class="icvideo-actions__right">
+                <div class="iconbox btn-hovered-light bg-danger" data-dismiss="modal"  data-toggle="tooltip" data-placement="top" title="Hangup"><i class="iconbox__icon text-white mdi mdi-phone-hangup"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- OUTGOING VOICE CALL -->
+  <div class="modal CallDialogFullscreen-sm" id="outGoingCall" tabindex="-1" role="dialog" aria-labelledby="outGoingCall" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="text-center">
+            <div class="user-avatar user-avatar-rounded user-avatar-xl"><img src="assets/images/user/80/01.jpg" alt=""></div>
+            <div class="userprofile-name"><span>Calling...</span>
+              <h4>Jack P. Angulo</h4>
+              <span>Product Manager</span>
+              <div class="call-duration">00:36</div>
+            </div>
+            <div class="call-options">
+              <div class="row">
+                <div class="col-4">
+                  <div class="call-options__iconbox"><i class="mdi mdi-microphone-off"></i></div>
+                  <h6>Mute</h6>
+                </div>
+                <div class="col-4">
+                  <div class="call-options__iconbox"><i class="mdi mdi-volume-high"></i></div>
+                  <h6>Speaker</h6>
+                </div>
+                <div class="col-4">
+                  <div class="call-options__iconbox"><i class="mdi mdi-pause"></i></div>
+                  <h6>Hold</h6>
+                </div>
+              </div>
+            </div>
+            <div class="call-actions">
+              <div class="call-hangup" data-dismiss="modal"><i class="mdi mdi-phone-hangup"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- main wrapper end -->
+	<!-- Javascripts Files -->
+	<script src="/statics/dist/js/jquery-3.3.1.slim.min.js" ></script>
+	<script src="/statics/dist/js/popper.min.js" ></script>
+	<script src="/statics/assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+	<script src="/statics/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="/statics/assets/vendors/material-floating-button/dist/mfb.min.js"></script>
+	<script src="/statics/dist/js/main.min.js"></script>
+</body>
+</html>
